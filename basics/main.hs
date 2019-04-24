@@ -20,5 +20,12 @@ chaining_multiple_io_works_only_with_do = do
     -- List comprehension
     let alist = [x ^ 2 | x <- [1..10]]
     print(alist)
+
+    -- Print a value defined later
+    print(avalue)
 -- Compiler complains if a main does not exist
 main = chaining_multiple_io_works_only_with_do 
+{-
+Interestingly, you can do this though
+-}
+avalue = "a value"
