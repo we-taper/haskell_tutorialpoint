@@ -20,3 +20,7 @@ Something unexpected from list
     print(take 10 [1,2..]) -- [1,2,3,4,5,6,7,8,9,10]
 -- list comprehension is beautiful
     print([ x | x <- [1..20], odd x, x < 10])  -- [1,3,5,7,9]
+{- Tuples are good for exact typing. Amazing, tuple of different length but with same type of contents are considered different typles. For example:
+-}
+    print([(1,2),(1,2)])  -- is allowed
+    -- [(1,2),(1,2,3)] is not allowed.
