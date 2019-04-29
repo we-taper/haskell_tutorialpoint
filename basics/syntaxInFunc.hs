@@ -33,6 +33,28 @@ tell ([x]) = "The list has one element: " ++ show x
 tell (x:y:[]) = "The list has two elements: " ++ show x ++ " and " ++ show y  
 tell (x:y:_) = "This list is long. The first two elements are: " ++ show x ++ " and " ++ show y  
 
+-- Language sugar
+-- a_sugar :: (Show a) => [a] -> String
+a_sugar :: [Char] -> String
+a_sugar all@(a1:a2:rest) = "The list " ++ all ++ " is [" ++ [a1] ++ ", " ++ [a2] ++ ", " ++ rest ++ "]"
+
+-- An alternative to multiple f-else
+bmiTell :: (RealFloat a) => a -> a -> String  
+bmiTell weight height  
+    | bmi <= skinny = "You're underweight, you emo, you!"  
+    | bmi <= normal = "You're supposedly normal. Pffft, I bet you're ugly!"  
+    | bmi <= fat = "You're fat! Lose some weight, fatty!"  
+    | otherwise = "You're a whale, congratulations!"
+    where bmi = weight / height ^ 2  
+          (skinny, normal, fat) = (18.5, 25.0, 30.0) -- The indentation in the front is important!
+
+calcBmis :: (RealFloat a) => [(a, a)] -> [a]
+calcBmis xs = [bmi w h | (w, h) <- xs]
+  where bmi w h = w / h ^ 2
+
+-- Use function in the infix way
+leq a b = a <= b  -- see usage in main
+
 main = do
     print(lucky 3)
     print(lucky 7)
@@ -59,3 +81,8 @@ CallStack (from HasCallStack):
     print(tell [])
     Maybe it is due to (Show a) in the definition?
     -}
+    print(a_sugar "abcdefg")
+    print(bmiTell 60 170)
+    print(leq 1 3)
+    print(1 `leq` 3)
+    print(calcBmis [(50, 170), (60, 175), (70, 175)])
