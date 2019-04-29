@@ -13,11 +13,11 @@ syntaxInFunc.hs:6:1: warning: [-Woverlapping-patterns]
   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 -}
 -- Pattern matching can be used to define recursive functions:
-factoral :: (Integral a) => a -> a
-factoral 0 = 1
-factoral n = n * factoral (n-1)
+factorial :: (Integral a) => a -> a
+factorial 0 = 1
+factorial n = n * factorial (n-1)
 -- Interestingly, in ghci we cannot do the type declaration three lines above.
--- And in that case, a factoral function defined as above hangs the program.
+-- And in that case, a factorial function defined as above hangs the program.
 --------------------------------------------
 -- Strange things used inside pattern matching:
 -- tuples
@@ -38,12 +38,12 @@ main = do
     print(lucky 7)
     print(unlucky 3)
     print(unlucky 7)
-    print(factoral 10)
+    print(factorial 10)
     {-The following would not even pass the compilation check:
-    print(factoral -1)
+    print(factorial -1)
     -}
     print(first (1, 2, 3))
-    print(head' "asdf")
+    print(head' "abcde")
     {- The following raises an exception:
     *** Exception: Can't call head on an empty list, dummy!
 CallStack (from HasCallStack):
@@ -54,7 +54,7 @@ CallStack (from HasCallStack):
     print(tell "")
     print(tell [1])
     print(tell "ab")
-    print(tell "asdf")
+    print(tell "abcde")
     {- Interestingly, this won't compile:
     print(tell [])
     Maybe it is due to (Show a) in the definition?
