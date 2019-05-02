@@ -55,6 +55,19 @@ calcBmis xs = [bmi w h | (w, h) <- xs]
 -- Use function in the infix way
 leq a b = a <= b  -- see usage in main
 
+-- Case expression is pretty cool
+describeList :: [a] -> String  
+describeList xs = "The list is " ++ case xs of [] -> "empty."  
+                                               [x] -> "a singleton list."   
+                                               xs -> "a longer list."  
+
+{- An equivalent def
+describeList :: [a] -> String  
+describeList xs = "The list is " ++ what xs  
+    where what [] = "empty."  
+          what [x] = "a singleton list."  
+          what xs = "a longer list."
+-}
 main = do
     print(lucky 3)
     print(lucky 7)
@@ -86,3 +99,11 @@ CallStack (from HasCallStack):
     print(leq 1 3)
     print(1 `leq` 3)
     print(calcBmis [(50, 170), (60, 175), (70, 175)])
+
+    -- let makes an expressions, and therefore can be used as:
+    print(4 * (let a = 9 in a + 1) + 2)  -- 42
+    -- It can also introduces multiple score
+    print(let a = 100; b = 200; c = 300 in a*b*c, let foo="Hey "; bar = "there!" in foo ++ bar)  -- (6000000,"Hey there!")
+    print(describeList [])
+    print(describeList [1,2])
+    print(describeList [2])
